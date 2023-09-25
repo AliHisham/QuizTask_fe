@@ -3,13 +3,25 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QuizContextProvider } from "./Context/QuizContext";
+import QuizForm from "./Components/statefull/QuizForm";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/QuizForm",
+    element: <QuizForm />,
+  },
+]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <QuizContextProvider>
-      <App />
+      <RouterProvider router={router} />
     </QuizContextProvider>
   </React.StrictMode>
 );
