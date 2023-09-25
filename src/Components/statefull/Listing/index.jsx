@@ -9,14 +9,18 @@ const Listing = () => {
     console.log("create new quiz");
   };
   return (
-    <div className="flex p-4 bg-gray-400 rounded-lg">
+    <div className="flex p-4 rounded-lg">
       <div className="justify-start">
         <Button onClick={toggle}>{userType}</Button>
       </div>
       <div className="flex flex-grow justify-end items-end">
-        <Button onClick={createNewQuiz}>
+        {/* <Button onClick={createNewQuiz}>
           {<Link to={"QuizForm"}>{"New Quiz"}</Link>}
-        </Button>
+        </Button> */}
+
+        <Link to={"QuizForm"}>
+          <Button>{"New Quiz"}</Button>
+        </Link>
       </div>
     </div>
   );

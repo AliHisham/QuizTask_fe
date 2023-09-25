@@ -7,8 +7,8 @@ function App() {
   const { toggle, userType } = useContext(QuizContext);
 
   return (
-    <div className="bg-green-300">
-      <Listing></Listing>
+    <div className="bg-gray-200 m-4 rounded-md p-4">
+      <Listing />
     </div>
   );
 }
