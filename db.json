@@ -1,0 +1,126 @@
+{
+  "quizzes": [
+    {
+      "created": "2020-09-09 09:26:39",
+      "description": "Description",
+      "id": 1,
+      "modified": "2020-09-09 09:26:39",
+      "questions_answers": [
+        {
+          "answer_id": null,
+          "answers": [
+            {
+              "is_true": false,
+              "text": "question 1 answer 1 false"
+            },
+            {
+              "is_true": false,
+              "text": "question 1 answer 2 false"
+            },
+            {
+              "is_true": true,
+              "text": "question 1 answer 3 true"
+            },
+            {
+              "is_true": false,
+              "text": "question 1 answer 4 false"
+            }
+          ],
+          "feedback_false": "question 1 false feedback",
+          "feedback_true": "question 1 true feedback",
+          "text": "question 1 text"
+        },
+        {
+          "answer_id": null,
+          "answers": [
+            {
+              "is_true": true,
+              "text": "question 2 answer 1 true"
+            },
+            {
+              "is_true": false,
+              "text": "question 2 answer 2 false"
+            }
+          ],
+          "feedback_false": "question 2 false feedback",
+          "feedback_true": "question 2 true feedback",
+          "text": "question 2 text"
+        },
+        {
+          "answer_id": null,
+          "answers": [
+            {
+              "is_true": false,
+              "text": "question 3 answer 1 false"
+            },
+            {
+              "is_true": true,
+              "text": "question 3 answer 2 true"
+            },
+            {
+              "is_true": false,
+              "text": "question 3 answer 3 false"
+            }
+          ],
+          "feedback_false": "question 3 false feedback",
+          "feedback_true": "question 3 true feedback",
+          "text": "question 3 text"
+        }
+      ],
+      "score": null,
+      "title": "quiz title",
+      "url": "https://www.youtube.com/watch?v=e6EGQFJLl04"
+    },
+    {
+      "created": "26 9 2023",
+      "description": "animals",
+      "modified": "26 9 2023",
+      "questions_answers": [
+        {
+          "answer_id": null,
+          "text": "who is the fastes animal",
+          "answers": [
+            {
+              "text": "tiger",
+              "is_true": false
+            },
+            {
+              "text": "cheetah",
+              "is_true": "true"
+            },
+            {
+              "text": "lion",
+              "is_true": false
+            }
+          ],
+          "feedback_false": "false feedback",
+          "feedback_true": "true feedback"
+        },
+        {
+          "answer_id": null,
+          "text": "who is the slowest animal",
+          "answers": [
+            {
+              "text": "ant",
+              "is_true": false
+            },
+            {
+              "text": "elephant",
+              "is_true": false
+            },
+            {
+              "text": "ant2",
+              "is_true": false
+            }
+          ],
+          "feedback_false": "false feedback",
+          "feedback_true": "true feedback"
+        }
+      ],
+      "score": null,
+      "title": "animals",
+      "url": "animallsss",
+      "id": 2
+    }
+  ]
+}

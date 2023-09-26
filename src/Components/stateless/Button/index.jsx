@@ -5,7 +5,9 @@ const Button = ({ children, onClick, styling, disabled }) => {
     <button
       disabled={disabled}
       onClick={onClick}
-      className={styling ? styling : "bg-purple-600 p-4 rounded-md text-white"}
+      className={
+        styling ? styling : "bg-purple-600 p-4 rounded-md text-white w-full"
+      }
     >
       {children}
     </button>
