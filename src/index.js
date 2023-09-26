@@ -16,6 +16,10 @@ const router = createBrowserRouter([
     path: "/QuizForm",
     element: <QuizForm />,
   },
+  {
+    path: "/QuizForm/:id",
+    element: <QuizForm />,
+  },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

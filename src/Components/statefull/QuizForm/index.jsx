@@ -1,11 +1,13 @@
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import Input from "../../stateless/Input";
 import Button from "../../stateless/Button";
 import Answer from "../../stateless/Answer";
 import AddQuestion from "../../stateless/AddQuestion";
 import { QuizContext } from "../../../Context/QuizContext";
+import { useParams, Link } from "react-router-dom";
 const QuizForm = () => {
-  const { addQuiz } = useContext(QuizContext);
+  const { id } = useParams();
+  const { addQuiz, allQuizzes, editQuiz } = useContext(QuizContext);
   const [ansCheck, setAnsCheck] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [answerInput, setAnswerInput] = useState("");
@@ -16,6 +18,15 @@ const QuizForm = () => {
   const [savedQuestions, setSavedQuestions] = useState([]);
   const inputRef = useRef(null);
 
+  useEffect(() => {
+    if (id) {
+      let quiz = allQuizzes.find((q) => q.id == id);
+
+      setUrl(quiz.url);
+      setSavedQuestions(quiz.questions_answers);
+      setDescription(quiz.description);
+    }
+  }, [id]);
   const handleAddAnswer = () => {
     setAnswers([...answers, { text: answerInput, is_true: isCorrect }]);
     setAnswerInput("");
@@ -41,7 +52,20 @@ const QuizForm = () => {
   };
 
   const removeAnswer = (a) => {
-    setAnswers((prev) => prev.filter((ans) => ans.text !== a.text));
+    if (id) {
+      console.log(a, "inside");
+      console.log("cjec");
+      const questionAnswers = savedQuestions.map((saved) => {
+        const answerss = saved.answers.filter((ans) => ans.text !== a);
+        return {
+          ...saved,
+          answers: answerss,
+        };
+      });
+      setSavedQuestions(questionAnswers);
+    } else {
+      setAnswers((prev) => prev.filter((ans) => ans.text !== a.text));
+    }
   };
 
   const handleAddQuestion = () => {
@@ -61,23 +85,39 @@ const QuizForm = () => {
   };
 
   const addQuizz = () => {
-    let currentDate = new Date();
-    const day = currentDate.getDate();
-    const month = currentDate.getMonth() + 1; // Months are zero-based, so add 1
-    const year = currentDate.getFullYear();
-
-    // Format the date as "day month year"
-    const formattedDate = `${day} ${month} ${year}`;
-    let quizObj = {
-      created: formattedDate,
-      description: description,
-      modified: formattedDate,
-      questions_answers: savedQuestions,
-      score: null,
-      title: description,
-      url: url,
-    };
-    addQuiz(quizObj);
+    if (id) {
+      let currentDate = new Date();
+      const day = currentDate.getDate();
+      const month = currentDate.getMonth() + 1;
+      const year = currentDate.getFullYear();
+      const formattedDate = `${day} ${month} ${year}`;
+      let quiz = {
+        modified: formattedDate,
+        description: description,
+        questions_answers: savedQuestions,
+        score: null,
+        title: description,
+        url: url,
+        id: id,
+      };
+      editQuiz(quiz);
+    } else {
+      let currentDate = new Date();
+      const day = currentDate.getDate();
+      const month = currentDate.getMonth() + 1;
+      const year = currentDate.getFullYear();
+      const formattedDate = `${day} ${month} ${year}`;
+      let quizObj = {
+        created: formattedDate,
+        description: description,
+        modified: formattedDate,
+        questions_answers: savedQuestions,
+        score: null,
+        title: description,
+        url: url,
+      };
+      addQuiz(quizObj);
+    }
   };
 
   return (
@@ -96,13 +136,13 @@ const QuizForm = () => {
         onChange={(event) => setUrl(event.target.value)}
         ref={inputRef}
         id="url"
+        value={url}
         placeHolder={"enter url"}
       ></Input>
 
       <div className="col-span-2">
         {savedQuestions.length ? (
           <>
-            {console.log(savedQuestions, "savedddd")}
             {savedQuestions.map((saved, i) => {
               return (
                 <div key={i}>
@@ -118,7 +158,12 @@ const QuizForm = () => {
                     {saved.answers.map((ans, j) => {
                       return (
                         <div className="basis-1/4" key={j}>
-                          <Answer title={ans.text}></Answer>
+                          <Answer
+                            onClick={() => {
+                              removeAnswer(ans.text);
+                            }}
+                            title={ans.text}
+                          ></Answer>
                         </div>
                       );
                     })}
@@ -161,12 +206,14 @@ const QuizForm = () => {
       </div>
 
       <div className="col-span-2 justify-center text-center">
-        <Button
-          onClick={addQuizz}
-          disabled={savedQuestions.length ? false : true}
-        >
-          {"Create Quizz"}
-        </Button>
+        <Link to={"/"}>
+          <Button
+            onClick={addQuizz}
+            disabled={savedQuestions.length ? false : true}
+          >
+            {id ? "Edit Quiz " : "Create Quiz"}
+          </Button>
+        </Link>
       </div>
     </div>
   );

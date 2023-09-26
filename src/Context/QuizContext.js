@@ -4,8 +4,9 @@ import axios from "axios";
 export const QuizContext = createContext({
   userType: null,
   toggle: null,
-  allQuizzes: null,
+  allQuizzes: [],
   addQuiz: null,
+  editQuiz: null,
 });
 
 export const QuizContextProvider = ({ children }) => {
@@ -24,7 +25,7 @@ export const QuizContextProvider = ({ children }) => {
       .catch((err) => {
         console.log(err, "errror");
       });
-  }, []);
+  }, [allQuizzes]);
 
   const toggle = () => {
     setUserType((prev) => {
@@ -48,6 +49,41 @@ export const QuizContextProvider = ({ children }) => {
         });
     }
   };
+  const editQuiz = (quiz) => {
+    console.log(quiz, "checking from context");
+    if (quiz) {
+      axios
+        .put(`http://localhost:5000/quizzes/${quiz.id}`, {
+          created: quiz.created,
+          description: quiz.description,
+          modified: quiz.modified,
+          questions_answers: quiz.questions_answers,
+          score: quiz.score,
+          title: quiz.description,
+          url: quiz.url,
+        })
+        .then((res) => {
+          setAllQuizzes((prev) => {
+            prev.map((p) => {
+              if (p.id == quiz.id) {
+                return {
+                  ...p,
+                  created: quiz.created,
+                  description: quiz.description,
+                  modified: quiz.modified,
+                  questions_answers: quiz.questions_answers,
+                  score: quiz.score,
+                  title: quiz.description,
+                  url: quiz.url,
+                };
+              } else {
+                return p;
+              }
+            });
+          });
+        });
+    }
+  };
 
   return (
     <QuizContext.Provider
@@ -55,6 +91,8 @@ export const QuizContextProvider = ({ children }) => {
         userType,
         toggle,
         addQuiz,
+        allQuizzes,
+        editQuiz,
       }}
     >
       {children}
