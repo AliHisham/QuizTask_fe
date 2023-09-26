@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QuizContextProvider } from "./Context/QuizContext";
 import QuizForm from "./Components/statefull/QuizForm";
+import AnswerSheet from "./Components/statefull/AnswerSheet";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/QuizForm/:id",
     element: <QuizForm />,
+  },
+  {
+    path: "/answer/:id",
+    element: <AnswerSheet />,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));

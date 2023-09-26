@@ -50,7 +50,6 @@ export const QuizContextProvider = ({ children }) => {
     }
   };
   const editQuiz = (quiz) => {
-    console.log(quiz, "checking from context");
     if (quiz) {
       axios
         .put(`http://localhost:5000/quizzes/${quiz.id}`, {

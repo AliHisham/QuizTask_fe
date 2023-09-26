@@ -53,8 +53,6 @@ const QuizForm = () => {
 
   const removeAnswer = (a) => {
     if (id) {
-      console.log(a, "inside");
-      console.log("cjec");
       const questionAnswers = savedQuestions.map((saved) => {
         const answerss = saved.answers.filter((ans) => ans.text !== a);
         return {
